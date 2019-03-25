@@ -1,61 +1,41 @@
 import random
 
-randomInt = random.randint(1000,9999)
+randomInt = random.randint(1000, 9999)
 masterCode = str(randomInt)
+check = False
 
-def game() :
-    userInput = input('Enter the 4 digit code : ')
+
+def game():
+    user_input = input('Enter the 4 digit code : ')
     i = 0
-    correct = False
+    global check
 
-    if len(userInput) == 4 :
-        for num in userInput :
-            
-            i += 1
-            print(userInput)
-            print(masterCode)
-            if userInput == masterCode :
-                correct = True
-                print('Winner')
-                print(correct)
-                return (correct)
-            elif num == masterCode[i -1] :
-                print('C')
-                correct = False
-            elif num in masterCode :
-                print('I')
-                correct = False
-            else :
-                print('N')
-                correct = False
+    if len(user_input) == 4:
+        if not check:
+            print('Your code was :' + user_input)
+            for num in user_input:
 
-        else :
-            print('Enter a 4 digit code')
+                i += 1
+                if user_input == masterCode:
+                    print('Winner')
+                    check = True
+                    return check
+                elif user_input[i - 1] == masterCode[i - 1]:
+                    print('C')
+                elif num in masterCode:
+                    print('I')
+                else:
+                    print('N')
 
-game()
+            print("""
+C = right number in the right place
+I = right number but not in the right place
+N = not in the code
+            """)
+    else:
+        print('Enter a 4 digit code')
 
-# import random
-# randomInt = random.randint(1, 100)
 
-# def checker() :
-# 	userInput = int(input('Enter a number between 1 and 100 '))
-# 	correct = False
-# 	while not correct :
-# 		print(randomInt)
+while not check:
+    game()
 
-# 		if userInput == randomInt :
-# 			print('You guessed right...congrats -,-')
-# 			correct = True
-# 			print(userInput)
-
-# 		elif userInput > randomInt :
-# 			correct = False
-# 			userInput = int(input('Your number is to big..try again '))
-# 			print(userInput)
-		
-# 		elif userInput < randomInt :
-# 			correct = False
-# 			userInput = int(input('Your number is to small..try again '))
-# 			print(userInput)
-
-# checker()
