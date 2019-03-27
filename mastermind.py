@@ -1,41 +1,67 @@
 import random
 
-randomInt = random.randint(1000, 9999)
-masterCode = str(randomInt)
-check = False
+master_code = ''
 
 
-def game():
-    user_input = input('Enter the 4 digit code : ')
-    i = 0
-    global check
+def start():
+    createNum()
+    userInput()
+
+
+def createNum():
+    global master_code
+    random_int = random.randint(0000, 9999)
+    code = '{:04}'.format(random_int)
+    master_code = str(code)
+
+
+def userInput():
+
+    user_input = input('Enter a 4 digit code: ')
 
     if len(user_input) == 4:
-        if not check:
-            print('Your code was :' + user_input)
-            for num in user_input:
+        try:
+            answer = int(user_input)
+            answer = '{:04}'.format(answer)
+            check(answer)
 
-                i += 1
-                if user_input == masterCode:
-                    print('Winner')
-                    check = True
-                    return check
-                elif user_input[i - 1] == masterCode[i - 1]:
-                    print('C')
-                elif num in masterCode:
-                    print('I')
-                else:
-                    print('N')
+        except ValueError:
+            print('enter a number')
+            userInput()
 
-            print("""
-C = right number in the right place
-I = right number but not in the right place
-N = not in the code
-            """)
     else:
-        print('Enter a 4 digit code')
+        print('Code should be 4 digits')
+        userInput()
 
 
-while not check:
-    game()
+def check(user_input):
 
+    global master_code
+    user_answer = str(user_input)
+    i = 0
+    if user_answer == master_code:
+        print("You've won...the code was " + master_code)
+
+    else:
+        print('Your code was :' + user_answer)
+        for num in user_answer:
+
+            i += 1
+            if user_answer[i - 1] == master_code[i - 1]:
+                print('C')
+            elif num in master_code:
+                print('I')
+            elif num not in master_code:
+                print('N')
+
+        print("""
+        C = right number in the right place
+        I = right number but not in the right place
+        N = not in the code
+        """)
+
+    if user_answer != master_code:
+        userInput()
+
+
+start()
