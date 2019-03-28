@@ -16,7 +16,6 @@ def createNum():
 
 
 def userInput():
-
     user_input = input('Enter a 4 digit code: ')
 
     if len(user_input) == 4:
@@ -35,7 +34,6 @@ def userInput():
 
 
 def check(user_input):
-
     global master_code
     user_answer = str(user_input)
     i = 0
